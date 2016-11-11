@@ -1,63 +1,78 @@
-package cs520.hw3.part2;
+package cs520.hw5;
 
-public class Student {
+
+import java.util.ArrayList;
+
+public class Student 
+{
 private String name;
-private int homework1, homework2, homework3, homework4, homework5, homework6;
+private ArrayList<Integer> homeworks;
 
-public Student(String name){//constructor with argument of name
-	this.name = name;
-}
+public Student (String name){//constructor with name as the argument
+	this.name= name;
+	homeworks = new ArrayList<Integer>();//initialize homeworks arraylist
+	 
+} 
+	
+	
+			/**
+			 * @return the name
+			 */
+			public String getName() {
+				return name;
+			}
+			/**
+			 * @param name the name to set
+			 */
+			public void setName(String name) {
+				this.name = name;
+			}
+			
+			public void addHomeworkGrade(int homeworkGrade) //takes one arugment, the new homework grade
+			{
+				homeworks.add(homeworkGrade);
+				
+			}
+			
+		
+			public int getHomeworkGrade(int index)//takes the homework grade index
+			{
+				
+				try {
+					return homeworks.get(index);
+				
+				}
+				catch (IndexOutOfBoundsException e){
+					throw e;
+				}
+			
+			}
+			public double computeWeightedAverage() //takes no arguments
+			{
+				int sum=0;
+				int counter=0;
+				int grade=-1;
+				while (counter < homeworks.size()) 
+					{
+					grade=(getHomeworkGrade(counter));
+			
+					if ((counter%2)==0)//even homework grades have 2x the wieight
+					sum = sum + (grade*2);	
+					
+					else
+						sum = grade + sum;	
+					counter++;
+					}
+		
+				
+					return (sum/homeworks.size()); //the amount of homework grades, get the average
+					
 
-/**
- * @param homework1 the homework1 to set
- */
-public void setHomework1(int homework1) {
-	this.homework1 = homework1;
-}
-
-
-/**
- * @param homework2 the homework2 to set
- */
-public void setHomework2(int homework2) {
-	this.homework2 = homework2;
-}
-
-/**
- * @param homework3 the homework3 to set
- */
-public void setHomework3(int homework3) {
-	this.homework3 = homework3;
-}
-
-/**
- * @param homework4 the homework4 to set
- */
-public void setHomework4(int homework4) {
-	this.homework4 = homework4;
-}
-
-/**
- * @param homework5 the homework5 to set
- */
-public void setHomework5(int homework5) {
-	this.homework5 = homework5;
-}
-
-/**
- * @param homework6 the homework6 to set
- */
-public void setHomework6(int homework6) {
-	this.homework6 = homework6;
-}
-
-public double computeAverage (){
-	double computedAverage=(homework1 + homework2 + homework3 + homework4 + homework5 + homework6);
-	return (computedAverage/6);
-}
-
-public String tostring(){
-	return "The " + name + "'s average grade is " + String.format("%.2f", computeAverage());
-}
+			}
+			
+			public String toString(){
+				return "The " + getName() + "'s weighted grade is " + computeWeightedAverage();
+			}
+			
 
 }
