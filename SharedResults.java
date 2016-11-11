@@ -1,38 +1,54 @@
-package cs520.hw6.part1;
+package cs520.hw6.part2;
 
 import java.util.ArrayList;
 
 public class SharedResults {
-
-	private ArrayList<Integer> results; //1a
+	private ArrayList<Integer> results;
 	
-	public SharedResults(){ //1b
+	public SharedResults(){
 		results = new ArrayList<Integer>();
 	}
 	
-	public synchronized void addToResults(int number){ //1c
-		try{
-		results.add(number);
-		System.out.print("\n Thread "  + Thread.currentThread().getName() + " is adding " + number + "\n Cumulative Results are " +  results);
-		} catch (IndexOutOfBoundsException e) {
-			e.printStackTrace();
+	int counter=0;
+	public synchronized void addToResults(int turn, int addResult){ //2g
+		
+while (counter <=results.size()){ 
+		
+			if (turn == counter) {
+				results.add(addResult);
+				System.out.println("Calling Thread's Turn " + turn + " Thread " + Thread.currentThread().getName() + " is adding " + addResult + ", \n \t Cumulative Result is " + results);
+				notifyAll(); //notify threads turn					
+				counter++;
+
+			}
+			else if (turn > counter){
+				try {
+					System.out.println("Calling Thread's Turn " + turn + ", WhoseTurn " + counter + "...Wait");		
+					wait();
+				} catch (InterruptedException e){
+					e.printStackTrace();
+				}
+				
+			}
+			 else if (turn < counter){
+				 break;
+			 }
 		}
 	}
 	
-	public synchronized int getResult (){ //1d
-		int sum=0;
-		int counter=0;
-		
-		while (counter < results.size()){
-			sum = sum + results.get(counter);
-			counter++;
-		}
-		
+	
+	public synchronized int getResult(){
+		int sum = 0;
+		int x = 0;
 		try {
-			return sum;
+			while (x < results.size()){
+				sum = results.get(x) + sum;
+				x++;
+			}
 		} catch (IndexOutOfBoundsException e){
-			throw e;
+			e.printStackTrace();
 		}
-		
+		return sum;
 	}
+	
 }
