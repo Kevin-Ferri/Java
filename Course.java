@@ -1,67 +1,67 @@
-package cs520.hw2.part1;
+package cs520.hw2.part2;
 
-import javax.swing.*;
-
-public class Course
+public class Course 
 {
-	
-	private String courseName;
-	private int costPerCredit;
-	private int numberOfCredits;
-	
-	
-	
-	/**
-	 * @param courseName the courseName to set
-	 */
-	public void setCourseName(String courseName) {
-		this.courseName = courseName;
-	}
-
-	/**
-	 * @param costPerCredit the costPerCredit to set
-	 */
-	public void setCostPerCredit(int costPerCredit) {
-		this.costPerCredit = costPerCredit;
-	}
-
-	/**
-	 * @param numberOfCredits the numberOfCredits to set
-	 */
-	public void setNumberOfCredits(int numberOfCredits) {
-		this.numberOfCredits = numberOfCredits;
-	}
+private String courseName;
+private int costPerCredit;
+private int numberOfCredits;
 
 
-	/**
-	 * @return the courseName
-	 */
-	public String getCourseName() {
-		return courseName = JOptionPane.showInputDialog("Enter the name of the course");
-	}
+public Course(String courseName, int costPerCredit, int numberOfCredits){
+	this.courseName = courseName;
+	this.costPerCredit = costPerCredit;
+	this.numberOfCredits = numberOfCredits;
+	System.out.println("In Course Constructor values set: \n CourseName = " + getCourseName() + ", Cost per Credit = $" + getCostPerCredit() + ", Number of Credits = " + getNumberOfCredits ());
+}
 
-	/**
-	 * @return the costPerCredit
-	 */
-	public int getCostPerCredit() {
-		return costPerCredit = Integer.parseInt(JOptionPane.showInputDialog("Enter the cost per credit of the course"));
-	}
+/**
+ * @return the courseName
+ */
+public String getCourseName() {
+	return courseName;
+}
 
-	/**
-	 * @return the numberOfCredits
-	 */
-	public int getNumberOfCredits() {
-		return numberOfCredits = Integer.parseInt(JOptionPane.showInputDialog("Enter the number of credits of the course"));
-	}
+/**
+ * @param courseName the courseName to set
+ */
+public void setCourseName(String courseName) {
+	this.courseName = courseName;
+}
 
-	public int getTotalTuition()
-	{
-		return costPerCredit * numberOfCredits;
-	}
+/**
+ * @return the costPerCredit
+ */
+public int getCostPerCredit() {
+	return costPerCredit;
+}
 
-	public void printTuitionDetails()
-	{
-		JOptionPane.showMessageDialog(null, "Course Name: " + getCourseName() + "\n Cost per Credit: " + getCostPerCredit() + "\n Number of Credits: " + getNumberOfCredits() + " \nTotal Tuition Cost: " + getTotalTuition());
-	}
+/**
+ * @param costPerCredit the costPerCredit to set
+ */
+public void setCostPerCredit(int costPerCredit) {
+	this.costPerCredit = costPerCredit;
+}
+
+/**
+ * @return the numberOfCredits
+ */
+public int getNumberOfCredits() {
+	return numberOfCredits;
+}
+
+/**
+ * @param numberOfCredits the numberOfCredits to set
+ */
+public void setNumberOfCredits(int numberOfCredits) {
+	this.numberOfCredits = numberOfCredits;
+}
+
+public int getTotalTuition(){
+	return numberOfCredits * costPerCredit;
+}
+
+public String toString(){
+	return "CourseName: " + courseName + " @ $" + getTotalTuition();
+}
 
 }
